@@ -31,21 +31,21 @@ class User {
   }
 
   viewOneUser(req, res) {
-    const { idUser } = req.params
+    const { userId } = req.params
 
-    if (idUser == undefined || idUser == 'null') {
+    if (userId == undefined || userId == 'null') {
       res.status(400).send({ message: "The id of the user must be filled in" })
     }
 
-    user.findOne({ _id: idUser })
+    user.findOne({ _id: userId })
       .exec((err, data) => {
         if (err) {
           res.status(500).send({ message: "Error processing your request", error: err })
         } else {
-          if (data.length <= 0) {
-            res.status(200).send({ message: `User ${idUser} does not exist in the database` })
+          if (data == null) {
+            res.status(200).send({ message: `User does not exist in the database` })
           } else {
-            res.status(200).send({ message: `User ${idUser} successfully recovered`, data: data })
+            res.status(200).send({ message: `User ${data.name} successfully recovered`, data: data })
           }
         }
       })
