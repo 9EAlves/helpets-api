@@ -30,3 +30,5 @@ app.use('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`API escutando na porta ${PORT}`)
 })
+
+console.log("Ola World")
