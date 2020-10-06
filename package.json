@@ -1,0 +1,19 @@
+{
+  "name": "helpets-api",
+  "version": "1.0.0",
+  "description": "Projeto realizado para a disciplina Laboratório de Engenharia de Software.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarceloTonhetti/helpets-api.git"
+  },
+  "author": "Helpets team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarceloTonhetti/helpets-api/issues"
+  },
+  "homepage": "https://github.com/MarceloTonhetti/helpets-api#readme"
+}
