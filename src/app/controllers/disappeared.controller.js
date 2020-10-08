@@ -23,5 +23,17 @@ class Disappeared {
             }
         })
     }
+
+    viewOneDisappeared(req, res){
+        const id = req.params.id
+
+        disappearedschema.find({_id: id}, (err, data) => {
+            if(err){
+                res.status(500).send({message: " Houve um erro ao procesar a sua requisição",error: err})
+            }else{
+                res.status(200).send({message: `Disappared ${id} foi recuperado com sucesso`, data: data})
+            }
+        })
+    }
 }
 module.exports = new Disappeared()
