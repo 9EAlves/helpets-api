@@ -5,7 +5,9 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 const database = require('./src/config/database')
 
+
 const UserRoutes = require('./src/app/routes/user.routes')
+const AdoptionRoutes = require('./src/app/routes/adoption.routes')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.text())
@@ -25,6 +27,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', UserRoutes)
+app.use('/adoption', AdoptionRoutes)
 
 
 app.use('*', (req, res) => {
