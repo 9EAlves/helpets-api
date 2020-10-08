@@ -39,6 +39,11 @@ const DisappearedSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }    
 },
     {
@@ -46,4 +51,4 @@ const DisappearedSchema = new Schema({
         versionKey: false
     }
 )
-module.exports = model('disappearedschema', DisappearedSchema)
+module.exports = model('Disappeared', DisappearedSchema)
