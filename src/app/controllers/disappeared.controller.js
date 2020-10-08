@@ -13,5 +13,15 @@ class Disappeared {
             }
         })
     }
+
+    viewAllDisappeareds(req,res){
+        disappearedschema.find({}, (err,data) => {
+            if(err){
+                res.status(500).send({message: " Houve um erro ao processara sua requisição", error: err})
+            }else{
+                res.status(200).send({message: " Todos os Disappeareds foram recuperados com sucesso", disappeared: data})
+            }
+        })
+    }
 }
 module.exports = new Disappeared()
