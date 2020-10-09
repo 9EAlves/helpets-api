@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000
 const database = require('./src/config/database')
 
 const UserRoutes = require('./src/app/routes/user.routes')
+const AdRoutes = require('./src/app/routes/ad.routes')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.text())
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', UserRoutes)
+app.use('/ad', AdRoutes)
 
 
 app.use('*', (req, res) => {
