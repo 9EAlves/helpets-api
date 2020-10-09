@@ -5,10 +5,10 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 const database = require('./src/config/database')
 
-// rotas da aplicação
-const DisappearedRoutes = require('./src/app/routes/disappeared.routes')
-
 const UserRoutes = require('./src/app/routes/user.routes')
+const AdoptionRoutes = require('./src/app/routes/adoption.routes')
+const AdRoutes = require('./src/app/routes/ad.routes')
+const DisappearedRoutes = require('./src/app/routes/disappeared.routes')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.text())
@@ -28,8 +28,10 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', UserRoutes)
-
+app.use('/adoption', AdoptionRoutes)
+app.use('/ad', AdRoutes)
 app.use('/disappeared', DisappearedRoutes)
+
 
 app.use('*', (req, res) => {
   res.send({ message: 'API não encontrada!' })
