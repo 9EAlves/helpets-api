@@ -84,6 +84,7 @@ class Disappeared {
             } else {
                 res.status(200).send({ message: 'disappeared successfully deleted, data: result' })
             }
+
         })
     }
 }
