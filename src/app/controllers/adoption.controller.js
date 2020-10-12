@@ -2,23 +2,44 @@ const adoption = require('./../models/adoption.model')
 
 class Adoption {
     createAdoption(req,res){
-        const body = req.body
+        const reqBody = req.body
+        const idUser = reqBody['user']
 
-        adoption.create(body, (err, data) => {
+        adoption.create(reqBody, (err, user) => {
             if(err){
                 res.status(500).send({ message: 'Error processing your request', error: err })
             }else{
-                res.status(201).send({ message: 'Successfully created new adoption!', data: data })
+                user.findById(idUser, (err, user) => {
+                    if (err) {
+                        res.status(500).send({ message: 'Error processing your request', error: err })
+                    }else{
+                        user.adoption.push(adoption)
+                        user.save({}, (err) =>{ 
+                            if (err) {
+                                res.status(500).send({ message: 'Error processing your request', error: err })
+                            }else{
+                                res.status(201).send({ message: 'Successfully created new adoption!', data: data })
+                            }
+                        })
+                    }
+                })
             }
         })
     }
 
     viewAllAdoption(req,res){
-        adoption.find({}, (err, data) =>{
+
+        adoption.find({})
+        .populate('User', {nome: 1, image: 1})
+        .exec((err, data) =>{
             if(err){
                 res.status(500).send({ message: 'Error processing your request', error: err })
             }else{
-                res.status(201).send({ message: 'Successfully recovered all adoptions!', data: data })
+                if (data.length <= 0) {
+                    res.status(201).send({ message: 'There are no adoptions registered in the database!!' })
+                }else{
+                    res.status(201).send({ message: 'Successfully recovered all adoptions!', data: data })
+                }
             }
         })
 }
@@ -31,6 +52,7 @@ class Adoption {
         }
 
         adoption.findOne({ _id: adoptionId })
+        .populate('User', {nome: 1, image: 1})
         .exec((err, data) => {
             if (err) {
             res.status(500).send({ message: "Error processing your request", error: err })
@@ -38,7 +60,7 @@ class Adoption {
             if (data == null) {
                 res.status(200).send({ message: `Adoption does not exist in the database` })
             } else {
-                res.status(200).send({ message: `Adoption ${data.name} successfully recovered`, data: data })
+                res.status(200).send({ message: `Adoption ${data.species} successfully recovered`, data: data })
             }
             }
         })
