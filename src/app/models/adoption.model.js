@@ -37,7 +37,12 @@ const AdoptionSchema = new Schema({
         type: Boolean
     },
     quantity: {
-        type: Number
+            male:{
+                type: Number
+            },
+            female:{
+                type: Number
+            }
     },
     description: {
         type: String,
