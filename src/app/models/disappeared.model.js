@@ -2,9 +2,9 @@ const {Schema, model} = require ('mongoose')
 
 const DisappearedSchema = new Schema({
     user: {
-        type: String,
-        required: true,
-        trim: true
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     image: {
         type: String,
@@ -39,12 +39,7 @@ const DisappearedSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }   
+    } 
 },
     {
         timestamps: true,

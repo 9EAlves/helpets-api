@@ -49,6 +49,11 @@ const AdoptionSchema = new Schema({
         required: true,
         trim: true
     }
-})
+},
+    {
+        timestamps: true,
+        versionKey: false
+}
+)
 
 module.exports = model('Adoption', AdoptionSchema);
