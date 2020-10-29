@@ -30,7 +30,7 @@ class Disappeared {
 
     viewAllDisappeareds(req,res){
         disappearedschema.find({})
-        .populate('User', {nome: 1, image: 1})
+       // .populate('User', {nome: 1, image: 1})
         .exec((err,data) => {
             if(err){
                 res.status(500).send({message: " Houve um erro ao processara sua requisição", error: err})
