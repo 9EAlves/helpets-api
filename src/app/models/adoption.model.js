@@ -48,6 +48,9 @@ const AdoptionSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    rated: {
+        type: Boolean
     }
 },
     {
