@@ -3,9 +3,9 @@ const user = require('./../controllers/user.controller')
 
 class Adoption {
     createAdoption(req, res) {
-        const body = req.body
+        const reqBody = req.body
 
-        adoption.create(body, (err, data) => {
+        adoption.create(reqBody, (err, data) => {
             if (err) {
                 res.status(500).send({ message: 'Error processing your request', error: err })
             } else {
