@@ -1,28 +1,15 @@
 const adoption = require('./../models/adoption.model')
+const user = require('./../controllers/user.controller')
 
 class Adoption {
     createAdoption(req, res) {
         const reqBody = req.body
-        const idUser = reqBody['user']
 
-        adoption.create(reqBody, (err, user) => {
+        adoption.create(reqBody, (err, data) => {
             if (err) {
                 res.status(500).send({ message: 'Error processing your request', error: err })
             } else {
-                user.findById(idUser, (err, user) => {
-                    if (err) {
-                        res.status(500).send({ message: 'Error processing your request', error: err })
-                    } else {
-                        user.adoption.push(adoption)
-                        user.save({}, (err) => {
-                            if (err) {
-                                res.status(500).send({ message: 'Error processing your request', error: err })
-                            } else {
-                                res.status(201).send({ message: 'Successfully created new adoption!', data: data })
-                            }
-                        })
-                    }
-                })
+                res.status(201).send({ message: 'Successfully created new adoption!', data: data })
             }
         })
     }
@@ -30,7 +17,7 @@ class Adoption {
     viewAllAdoption(req, res) {
 
         adoption.find({})
-            .populate('User', { nome: 1, image: 1 })
+            .populate('user', { name: 1, image: 1 })
             .exec((err, data) => {
                 if (err) {
                     res.status(500).send({ message: 'Error processing your request', error: err })
@@ -52,7 +39,7 @@ class Adoption {
         }
 
         adoption.findOne({ _id: adoptionId })
-            .populate('User', { nome: 1, image: 1 })
+            .populate('user', { name: 1, description: 1, contact: 1, address: 1 })
             .exec((err, data) => {
                 if (err) {
                     res.status(500).send({ message: "Error processing your request", error: err })
