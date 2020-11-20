@@ -36,7 +36,7 @@ app.use('/species', SpeciesRoutes)
 
 
 app.use('*', (req, res) => {
-  res.send({ message: 'API não encontrada!' })
+  res.status(404).send({ message: 'API não encontrada!' })
 })
 
 app.listen(PORT, () => {
