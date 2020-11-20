@@ -4,6 +4,6 @@ const Disappeared = require('./../controllers/disappeared.controller')
 
 route.post('/create', Disappeared.createDisappeared)
 route.get('/viewAll', Disappeared.viewAllDisappeareds)
-route.get('/viewOne/:id', Disappeared.viewOneDisappeared)
+route.get('/viewOne/:disappearedId', Disappeared.viewOneDisappeared)
 
 module.exports = route
