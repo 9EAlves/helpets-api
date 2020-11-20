@@ -5,6 +5,6 @@ const Adoption = require('./../controllers/adoption.controller')
 
 route.post('/create', Adoption.createAdoption)
 route.get('/viewAll', Adoption.viewAllAdoption)
-route.get('/viewOne/:adoptionID', Adoption.viewOneAdoption)
+route.get('/viewOne/:adoptionId', Adoption.viewOneAdoption)
 
 module.exports = route
