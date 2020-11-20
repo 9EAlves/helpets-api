@@ -79,13 +79,7 @@ const UserSchema = new Schema({
       type: String,
       trim: true
     }
-  },
-  disappeared: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Disappeared'
-    }
-  ]
+  }
 },
   {
     timestamps: true,
