@@ -1,4 +1,4 @@
-const {Schema, model} = require ('mongoose')
+const { Schema, model } = require('mongoose')
 
 const DisappearedSchema = new Schema({
     user: {
@@ -39,7 +39,10 @@ const DisappearedSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    } 
+    },
+    rated: {
+        type: Boolean
+    }
 },
     {
         timestamps: true,
