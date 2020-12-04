@@ -75,6 +75,7 @@ class Disappeared {
         })
     }
 
+
     deleteDisappeared(req, res) {
         const { disappearedId } = req.params
 
