@@ -88,4 +88,5 @@ class Disappeared {
     }
 }
 
+
 module.exports = new Disappeared()
