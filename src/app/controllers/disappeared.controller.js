@@ -55,6 +55,32 @@ class Disappeared {
             
         }) 
         }
-    }
 
+        
+        updateDisappeared(req, res) {
+        const { disappearedId } = req.params
+        const reqBody = req.body
+        
+        disappearedschema.updateOne({ _id: disappearedId }, { $set: {"rated":true} }, (err, disappeared) => {
+          if (err) {
+            res.status(500).send({ message: 'Error processing your request'})
+          } else {
+            res.status(200).send({ message: 'disappeared was successfully updated, data: disappeared' })
+          }
+        })
+      }
+
+      deleteDisappeared(req, res) {
+        const { disappearedId } = req.params
+    
+        disappearedschema.deleteOne({ _id: disappearedId }, (err, result) => {
+          if (err) {
+            res.status(500).send({ message: 'Error processing your request' })
+          } else {
+            res.status(200).send({ message: 'disappeared successfully deleted, data: result' })
+          }
+        })
+      }  
+
+    }
 module.exports = new Disappeared()

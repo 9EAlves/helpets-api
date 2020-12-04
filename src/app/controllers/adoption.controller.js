@@ -53,6 +53,31 @@ class Adoption {
             })
     }
 
+    updateAdoption(req, res) {
+        const { adoptionId } = req.params
+        const reqBody = req.body
+    
+        adoption.updateOne({ _id: adoptionId },  { $set: {"rated":true}}, (err, adoption) => {
+          if (err) {
+            res.status(500).send({ message: 'Error processing your request'})
+          } else {
+            res.status(200).send({ message: 'adoption was successfully updated, data: adoption' })
+          }
+        })
+      }
+
+      deleteAdoption(req, res) {
+        const { adoptionId } = req.params
+    
+        adoption.deleteOne({ _id: adoptionId }, (err, result) => {
+          if (err) {
+            res.status(500).send({ message: 'Error processing your request' })
+          } else {
+            res.status(200).send({ message: 'adoption successfully deleted, data: result' })
+          }
+        })
+      }  
+
 
 }
 
