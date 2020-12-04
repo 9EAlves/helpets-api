@@ -16,15 +16,20 @@ class Disappeared {
         })
     }
 
-    viewAllDisappeareds(req, res) {
-        disappearedschema.find({})
-            // .populate('User', {nome: 1, image: 1})
+    getWithParams(req, res) {
+        let query = {}
+        let { columnSort, valueSort } = req.query
+
+        disappearedschema
+            .find(query)
+            .sort([[columnSort, valueSort]])
+            .populate('user', { name: 1, description: 1, contact: 1, address: 1 })
             .exec((err, data) => {
                 if (err) {
                     res.status(500).send({ message: " Houve um erro ao processara sua requisição", error: err })
                 } else {
                     if (data.length <= 0) {
-                        res.status(200).send({ message: 'Não há desaparecidos registrados no banco de dados !!' })
+                        res.status(204).send({ message: 'Não há desaparecidos registrados no banco de dados !!' })
                     } else {
                         res.status(200).send({ message: " Todos os Desaparecidos foram recuperados com sucesso", data: data })
                     }
