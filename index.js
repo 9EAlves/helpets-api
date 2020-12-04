@@ -5,11 +5,8 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 const database = require('./src/config/database')
 
-const UserRoutes = require('./src/app/routes/user.routes')
-const AdoptionRoutes = require('./src/app/routes/adoption.routes')
-const AdRoutes = require('./src/app/routes/ad.routes')
-const DisappearedRoutes = require('./src/app/routes/disappeared.routes')
-const SpeciesRoutes = require('./src/app/routes/species.routes')
+const PrivateRoutes = require('./src/app/routes/private/private.routes')
+const PublicRoutes = require('./src/app/routes/public/public.routes')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.text())
@@ -28,11 +25,8 @@ app.get('/', (req, res) => {
   res.send({ message: `API escutado na porta ${PORT}` })
 })
 
-app.use('/user', UserRoutes)
-app.use('/adoption', AdoptionRoutes)
-app.use('/ad', AdRoutes)
-app.use('/disappeared', DisappearedRoutes)
-app.use('/species', SpeciesRoutes)
+app.use('/authenticated', PrivateRoutes)
+app.use('/public', PublicRoutes)
 
 
 app.use('*', (req, res) => {

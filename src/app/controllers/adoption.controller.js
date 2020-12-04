@@ -14,18 +14,22 @@ class Adoption {
         })
     }
 
-    viewAllAdoption(req, res) {
+    getWithParams(req, res) {
+        let query = {}
+        let { columnSort, valueSort } = req.query
 
-        adoption.find({})
+        adoption
+            .find(query)
+            .sort([[columnSort, valueSort]])
             .populate('user', { name: 1, image: 1 })
             .exec((err, data) => {
                 if (err) {
                     res.status(500).send({ message: 'Error processing your request', error: err })
                 } else {
                     if (data.length <= 0) {
-                        res.status(201).send({ message: 'There are no adoptions registered in the database!!' })
+                        res.status(204).send({ message: 'There are no adoptions registered in the database!!' })
                     } else {
-                        res.status(201).send({ message: 'Successfully recovered all adoptions!', data: data })
+                        res.status(200).send({ message: 'Successfully recovered all adoptions!', data: data })
                     }
                 }
             })
@@ -52,6 +56,31 @@ class Adoption {
                 }
             })
     }
+
+    updateAdoption(req, res) {
+        const { adoptionId } = req.params
+        const reqBody = req.body
+    
+        adoption.updateOne({ _id: adoptionId },  { $set: {"rated":true}}, (err, adoption) => {
+          if (err) {
+            res.status(500).send({ message: 'Error processing your request'})
+          } else {
+            res.status(200).send({ message: 'adoption was successfully updated, data: adoption' })
+          }
+        })
+      }
+
+      deleteAdoption(req, res) {
+        const { adoptionId } = req.params
+    
+        adoption.deleteOne({ _id: adoptionId }, (err, result) => {
+          if (err) {
+            res.status(500).send({ message: 'Error processing your request' })
+          } else {
+            res.status(200).send({ message: 'adoption successfully deleted, data: result' })
+          }
+        })
+      }  
 
 
 }
