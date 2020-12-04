@@ -14,17 +14,21 @@ class User {
     })
   }
 
-  viewAllUser(req, res) {
-    user.find({ user_type: "ong" })
-      .sort({ name: 1 })
+
+  getWithParams(req, res) {
+    let { columnSort, valueSort } = req.query
+
+    user
+      .find({ user_type: "ong" })
+      .sort([[columnSort, valueSort]])
       .exec((err, data) => {
         if (err) {
-          res.status(500).send({ message: "Error processing your request", error: err })
+          res.status(500).send({ message: 'Error processing your request', error: err })
         } else {
           if (data.length <= 0) {
-            res.status(200).send({ message: "No users were found in the database" })
+            res.status(204).send({ message: 'There are no adoptions registered in the database!!' })
           } else {
-            res.status(200).send({ message: "Successfully recovered all users!", data: data })
+            res.status(200).send({ message: 'Successfully recovered all adoptions!', data: data })
           }
         }
       })
